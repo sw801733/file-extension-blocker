@@ -29,9 +29,17 @@
     </div>
 
     <div id="customFileExtensionBox">
-        <span id="customExtensionCounter">0/200</span>
+        <span id="customExtensionCounter"></span>
         <div id="customExtensionList"></div>
     </div>
 
+    <script>
+        const MAX_TAGS = 200;
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('customExtensionCounter').textContent = `0/${MAX_TAGS}`;
+        });
+    
+    </script>
 </body>
 </html>
