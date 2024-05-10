@@ -13,3 +13,26 @@
     padding: 10px; 
     min-height: 100px;
 }
+
+#customExtensionList {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.custom-extension {
+    background-color: #eee;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.custom-extension button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
