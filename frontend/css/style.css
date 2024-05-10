@@ -7,3 +7,9 @@
 .fixed-label {
     margin-right: 20px;
 }
+
+#customFileExtensionBox {
+    border: 2px solid #ccc; 
+    padding: 10px; 
+    min-height: 100px;
+}
