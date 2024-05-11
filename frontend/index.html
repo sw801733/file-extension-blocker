@@ -81,8 +81,23 @@
 
         // 커스텀 확장자 제거 함수
         function deleteCustomExtension(extensionElement) {
+            const extension = extensionElement.querySelector('span').textContent;
             extensionElement.remove();
             updateExtensionCounter(-1);
+
+            // 커스텀 확장자 삭제 시 API 요청
+            $.ajax({
+                url: "http://localhost:8080/api/custom-extension/" + extension,
+                type: "DELETE",
+                contentType: "application/json",
+                data: JSON.stringify({ extension: extension, }),
+                success: function(response) {
+                    console.log("Response : ", response);
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error : ", error);
+                }
+            });
         }
 
         function addCustomExtension() {
@@ -101,7 +116,9 @@
                 // 새로운 커스텀 확장자를 위한 요소 생성
                 const newExtension = document.createElement('div');
                 newExtension.className = 'custom-extension';
-                newExtension.textContent = input;
+
+                const extensionText = document.createElement('span');  // 확장자 텍스트를 별도의 span에 저장
+                extensionText.textContent = input;
                 
                 // 커스텀 확장자 삭제를 위한 요소 생성
                 const deleteButton = document.createElement('button');
@@ -109,6 +126,7 @@
                 deleteButton.onclick = () => { deleteCustomExtension(newExtension); };
                 
                 // 새로운 커스텀 확장자 추가
+                newExtension.appendChild(extensionText);
                 newExtension.appendChild(deleteButton);
                 customExtensionList.appendChild(newExtension);
                 updateExtensionCounter(1);
@@ -118,7 +136,7 @@
                 
                 // 커스텀 확장자 추가 시 API 요청
                 $.ajax({
-                    url: "http://localhost:8080/api/custom-extension/" + newExtension,
+                    url: "http://localhost:8080/api/custom-extension/" + input,
                     type: "POST",
                     contentType: "application/json",
                     data: JSON.stringify({ extension: newExtension, }),
