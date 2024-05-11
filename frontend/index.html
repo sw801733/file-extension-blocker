@@ -1,8 +1,96 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>파일 확장자 선택</title>
+</head>
+<body>
+    <h1>파일 확장자 선택</h1>
+
+    <!-- 고정 확장자 체크 박스 -->
+    <div class="flex-container">
+        <span class="fixed-label">고정 확장자</span>
+        <div id="fixFileExtension">
+            <label><input type="checkbox" name="ext" value="bat"> bat</label>
+            <label><input type="checkbox" name="ext" value="cmd"> cmd</label>
+            <label><input type="checkbox" name="ext" value="com"> com</label>
+            <label><input type="checkbox" name="ext" value="cpl"> cpl</label>
+            <label><input type="checkbox" name="ext" value="exe"> exe</label>
+            <label><input type="checkbox" name="ext" value="scr"> scr</label>
+            <label><input type="checkbox" name="ext" value="js"> js</label>
+        </div>
+    </div>
+
+    <!-- 커스텀 확장자 추가 입력 폼 -->
+    <div class="flex-container">
+        <span class="fixed-label">커스텀 확장자</span>
+        <div id="customFileExtension">
+            <input type="text" id="customExtensionInput" placeholder="확장자 입력" />
+            <button onclick="addCustomExtension()">추가</button>
+        </div>
+    </div>
+
+    <!-- 커스텀 확장 추가 박스 -->
+    <div id="customFileExtensionBox">
+        <span id="customExtensionCounter"></span>
+        <div id="customExtensionList"></div>
+    </div>
+
+    <script>
+
+        // 추가 확장자 개수 제한
+        const MAX_COUNT = 200;
+        
+        // DOM 트리 완성 시 변수 적용
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('customExtensionCounter').textContent = `0/${MAX_COUNT}`;
+        });
+
+        // 커스텀 확장자 개수 증가 함수
+        function updateExtensionCounter(change) {
+            const counter = document.getElementById('customExtensionCounter');
+            const currentCount = parseInt(counter.textContent.split('/')[0]) + change;
+            counter.textContent = `${currentCount}/${MAX_COUNT}`;
+        }
+
+        function addCustomExtension() {
+
+            // 커스텀 확장자 입력 값 가져오기
+            const inputField = document.getElementById('customExtensionInput');
+            const input = inputField.value.trim();
+            
+            // 커스텀 확장자 추가 박스 요소
+            const customExtensionList = document.getElementById('customExtensionList');
+            const customExtensionCounter = document.getElementById('customExtensionCounter');
+            
+            // 입력 값이 있을 경우 & 최대 개수 이하인 경우 커스텀 확장자 추가
+            if (input && customExtensionList.children.length < MAX_COUNT) {
+                
+                // 새로운 커스텀 확장자를 위한 요소 생성
+                const newExtension = document.createElement('div');
+                newExtension.className = 'custom-extension';
+                newExtension.textContent = input;
+                
+                // 커스텀 확장자 삭제를 위한 요소 생성
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'X';
+                deleteButton.onclick = function () {
+                    newExtension.remove();
+                    updateExtensionCounter(-1);
+                };
+                
+                // 새로운 커스텀 확장자 추가
+                newExtension.appendChild(deleteButton);
+                customExtensionList.appendChild(newExtension);
+                updateExtensionCounter(1);
+
+                // 커스텀 확장자 입력 필드 초기화
+                inputField.value = '';
+            }
+        }
+
+    
+    </script>
+</body>
 </html>
