@@ -79,6 +79,12 @@
             counter.textContent = `${currentCount}/${MAX_COUNT}`;
         }
 
+        // 커스텀 확장자 제거 함수
+        function deleteCustomExtension(extensionElement) {
+            extensionElement.remove();
+            updateExtensionCounter(-1);
+        }
+
         function addCustomExtension() {
 
             // 커스텀 확장자 입력 값 가져오기
@@ -100,10 +106,7 @@
                 // 커스텀 확장자 삭제를 위한 요소 생성
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'X';
-                deleteButton.onclick = function () {
-                    newExtension.remove();
-                    updateExtensionCounter(-1);
-                };
+                deleteButton.onclick = () => { deleteCustomExtension(newExtension); };
                 
                 // 새로운 커스텀 확장자 추가
                 newExtension.appendChild(deleteButton);
