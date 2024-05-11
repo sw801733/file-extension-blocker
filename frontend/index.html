@@ -39,6 +39,30 @@
 
     <script>
 
+        // 고정 확장자 변경 시 API 요청
+        $(document).ready(function() {
+            $("#fixFileExtension input[type='checkbox']").change(function() {
+                var extension = $(this).val();
+                var isChecked = $(this).is(':checked');
+
+                // check 혹은 uncheck 에 따라 HTTP 메서드 선택
+                var method = isChecked ? 'POST' : 'DELETE';
+
+                $.ajax({
+                    url: "http://localhost:8080/api/fix-extension/" + extension,
+                    type: method,
+                    contentType: "application/json",
+                    data: JSON.stringify({ extension: extension, isEnabled: isChecked }),
+                    success: function(response) {
+                        console.log("Response : ", response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Error : ", error);
+                    }
+                });
+            });
+        });
+        
         // 추가 확장자 개수 제한
         const MAX_COUNT = 200;
         
