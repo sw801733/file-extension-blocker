@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/style.css">
     <title>파일 확장자 선택</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <h1>파일 확장자 선택</h1>
@@ -39,6 +40,58 @@
 
     <script>
 
+
+        $(document).ready(function() {
+
+            // 고정 확장자 조회 API 요청
+            $.ajax({
+                url: "http://localhost:8080/api/fix-extension/",
+                type: "GET",
+                contentType: "application/json",
+                success: function(response) {
+                    console.log("Response : ", response);
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error : ", error);
+                }
+            });
+
+            // 커스텀 확장자 조회 API 요청
+            $.ajax({
+                url: "http://localhost:8080/api/custom-extension/",
+                type: "GET",
+                contentType: "application/json",
+                success: function(response) {
+                    console.log("Response : ", response);
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error : ", error);
+                }
+            });
+
+            // 고정 확장자 변경 시 API 요청
+            $("#fixFileExtension input[type='checkbox']").change(function() {
+                var extension = $(this).val();
+                var isChecked = $(this).is(':checked');
+
+                // check 혹은 uncheck 에 따라 HTTP 메서드 선택
+                var method = isChecked ? 'POST' : 'DELETE';
+
+                $.ajax({
+                    url: "http://localhost:8080/api/fix-extension/" + extension,
+                    type: method,
+                    contentType: "application/json",
+                    data: JSON.stringify({ extension: extension, isEnabled: isChecked }),
+                    success: function(response) {
+                        console.log("Response : ", response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Error : ", error);
+                    }
+                });
+            });
+        });
+
         // 추가 확장자 개수 제한
         const MAX_COUNT = 200;
         
@@ -52,6 +105,27 @@
             const counter = document.getElementById('customExtensionCounter');
             const currentCount = parseInt(counter.textContent.split('/')[0]) + change;
             counter.textContent = `${currentCount}/${MAX_COUNT}`;
+        }
+
+        // 커스텀 확장자 제거 함수
+        function deleteCustomExtension(extensionElement) {
+            const extension = extensionElement.querySelector('span').textContent;
+            extensionElement.remove();
+            updateExtensionCounter(-1);
+
+            // 커스텀 확장자 삭제 시 API 요청
+            $.ajax({
+                url: "http://localhost:8080/api/custom-extension/" + extension,
+                type: "DELETE",
+                contentType: "application/json",
+                data: JSON.stringify({ extension: extension, }),
+                success: function(response) {
+                    console.log("Response : ", response);
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error : ", error);
+                }
+            });
         }
 
         function addCustomExtension() {
@@ -70,23 +144,37 @@
                 // 새로운 커스텀 확장자를 위한 요소 생성
                 const newExtension = document.createElement('div');
                 newExtension.className = 'custom-extension';
-                newExtension.textContent = input;
+
+                const extensionText = document.createElement('span');  // 확장자 텍스트를 별도의 span에 저장
+                extensionText.textContent = input;
                 
                 // 커스텀 확장자 삭제를 위한 요소 생성
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'X';
-                deleteButton.onclick = function () {
-                    newExtension.remove();
-                    updateExtensionCounter(-1);
-                };
+                deleteButton.onclick = () => { deleteCustomExtension(newExtension); };
                 
                 // 새로운 커스텀 확장자 추가
+                newExtension.appendChild(extensionText);
                 newExtension.appendChild(deleteButton);
                 customExtensionList.appendChild(newExtension);
                 updateExtensionCounter(1);
 
                 // 커스텀 확장자 입력 필드 초기화
                 inputField.value = '';
+                
+                // 커스텀 확장자 추가 시 API 요청
+                $.ajax({
+                    url: "http://localhost:8080/api/custom-extension/" + input,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ extension: newExtension, }),
+                    success: function(response) {
+                        console.log("Response : ", response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Error : ", error);
+                    }
+                });
             }
         }
 
