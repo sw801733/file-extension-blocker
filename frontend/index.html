@@ -115,6 +115,20 @@
 
                 // 커스텀 확장자 입력 필드 초기화
                 inputField.value = '';
+                
+                // 커스텀 확장자 추가 시 API 요청
+                $.ajax({
+                    url: "http://localhost:8080/api/custom-extension/" + newExtension,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ extension: newExtension, }),
+                    success: function(response) {
+                        console.log("Response : ", response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Error : ", error);
+                    }
+                });
             }
         }
 
