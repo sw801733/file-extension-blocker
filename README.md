@@ -4,12 +4,13 @@
 https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
 
 # 구현 방법
-- `React` 와 Github Page 를 활용한 **Frontend** 사이트 개발
+- `JQuery` 와 Github Page 를 활용한 **Frontend** 사이트 개발
 - `Spring Boot` 와 AWS EC2 를 활용한 **Backend** 서버 개발
 - `AWS RDS` MySQL 을 활용한 **Database** 구축
 
 ## 구현 방법 다이어그램
-![구현 다이어그램](https://github.com/sw801733/file-extension-blocker/assets/84767822/5cfbbb69-2d29-47f4-a597-dc4253aa1640)
+![구현 다이어그램]![image](https://github.com/sw801733/file-extension-blocker/assets/84767822/f90086bc-0650-4c79-995c-8dbd5b22f681)
+
 
 ## 아키텍처
 ![아키텍처](https://github.com/sw801733/file-extension-blocker/assets/84767822/3ea57c2d-6947-41dd-836d-d47cf6af42ca)
