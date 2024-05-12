@@ -42,10 +42,10 @@ public class FixExtensionService {
     // 고정 확장자 비활성화
     public ExtensionResponse disableFixExtension(ExtensionRequest extensionRequest) {
         String extensionName = extensionRequest.getExtension();
-        String extensionType = extensionRequest.getType();
-        boolean isChecked = extensionRequest.isChecked();
-
         Extension extension = extensionRepository.findByExtension(extensionName);
+
+        String extensionType = extension.getType();
+        boolean isChecked = extension.isChecked();
 
         if (isChecked) {
             extension.setChecked(false);
