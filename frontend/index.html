@@ -40,12 +40,12 @@
 
     <script>
 
-
+        var API_BASE_URL = "http://43.201.0.194:8080/api/";
         $(document).ready(function() {
 
             // 고정 확장자 조회 API 요청
             $.ajax({
-                url: "http://localhost:8080/api/fix-extension",
+                url: API_BASE_URL + "fix-extension",
                 type: "GET",
                 contentType: "application/json",
                 success: function(response) {
@@ -62,7 +62,7 @@
 
             // 커스텀 확장자 조회 API 요청
             $.ajax({
-                url: "http://localhost:8080/api/custom-extension",
+                url: API_BASE_URL + "custom-extension",
                 type: "GET",
                 contentType: "application/json",
                 success: function(response) {
@@ -85,7 +85,7 @@
                 var method = isChecked ? 'POST' : 'DELETE';
 
                 $.ajax({
-                    url: "http://localhost:8080/api/fix-extension/" + extension,
+                    url: API_BASE_URL + "fix-extension/" + extension,
                     type: method,
                     contentType: "application/json",
                     data: JSON.stringify({ extension: extension, isEnabled: isChecked }),
@@ -145,7 +145,7 @@
 
             // 커스텀 확장자 삭제 시 API 요청
             $.ajax({
-                url: "http://localhost:8080/api/custom-extension/" + extension,
+                url: API_BASE_URL + "custom-extension/" + extension,
                 type: "DELETE",
                 contentType: "application/json",
                 data: JSON.stringify({ extension: extension, }),
@@ -180,7 +180,7 @@
                 
                 // 커스텀 확장자 추가 시 API 요청
                 $.ajax({
-                    url: "http://localhost:8080/api/custom-extension/" + input,
+                    url: API_BASE_URL + "custom-extension/" + input,
                     type: "POST",
                     contentType: "application/json",
                     data: JSON.stringify({ extension: input, }),
