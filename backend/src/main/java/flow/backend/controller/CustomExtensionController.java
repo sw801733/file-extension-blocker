@@ -21,6 +21,9 @@ public class CustomExtensionController {
 
     private final CustomExtensionService customExtensionService;
 
+
+    // 메서드에 따른 Controller 구분
+
     @PostMapping("/")
     public ResponseEntity<ExtensionResponse> addCustomExtension(@RequestBody ExtensionRequest request) {
         ExtensionResponse response = customExtensionService.addCustomExtension(request);

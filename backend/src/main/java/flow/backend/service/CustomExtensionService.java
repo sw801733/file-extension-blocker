@@ -17,6 +17,7 @@ public class CustomExtensionService {
 
     private final ExtensionRepository extensionRepository;
 
+    // 커스텀 확장자 추가
     public ExtensionResponse addCustomExtension(ExtensionRequest extensionRequest) {
 
         String extensionName = extensionRequest.getExtension();
@@ -36,6 +37,7 @@ public class CustomExtensionService {
             .build();
     }
 
+    // 커스텀 확장자 삭제
     public ExtensionResponse deleteCustomExtension(ExtensionRequest extensionRequest) {
         String extensionName = extensionRequest.getExtension();
         String extensionType = extensionRequest.getType();
@@ -56,6 +58,7 @@ public class CustomExtensionService {
 
     }
 
+    // 추가한 커스텀 확장자 모두 조회
     public List<ExtensionResponse> findAllEnableCustomExtensions() {
         List<Extension> extensions = extensionRepository.findByTypeAndIsCheckedTrue("Custom");
 

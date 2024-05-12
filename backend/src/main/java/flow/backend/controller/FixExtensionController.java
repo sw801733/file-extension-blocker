@@ -20,6 +20,8 @@ public class FixExtensionController {
 
     private final FixExtensionService fixExtensionService;
 
+    // 메서드에 따른 Controller 구분
+
     @PostMapping("/")
     public ResponseEntity<ExtensionResponse> enableFixExtension(@RequestBody ExtensionRequest request) {
         ExtensionResponse response = fixExtensionService.enableFixExtension(request);

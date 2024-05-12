@@ -17,6 +17,7 @@ public class FixExtensionService {
 
     private final ExtensionRepository extensionRepository;
 
+    // 고정 확장자 활성화
     public ExtensionResponse enableFixExtension(ExtensionRequest extensionRequest) {
 
         String extensionName = extensionRequest.getExtension();
@@ -38,6 +39,7 @@ public class FixExtensionService {
             .build();
     }
 
+    // 고정 확장자 비활성화
     public ExtensionResponse disableFixExtension(ExtensionRequest extensionRequest) {
         String extensionName = extensionRequest.getExtension();
         String extensionType = extensionRequest.getType();
@@ -59,6 +61,7 @@ public class FixExtensionService {
 
     }
 
+    // 활성화된 고정 확장자 모두 조회
     public List<ExtensionResponse> findAllEnableFixExtensions() {
         List<Extension> extensions = extensionRepository.findByTypeAndIsCheckedTrue("Fix");
 
