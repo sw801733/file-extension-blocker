@@ -9,7 +9,7 @@ https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
 - `AWS RDS` MySQL 을 활용한 **Database** 구축
 
 ## 구현 방법 다이어그램
-![구현 다이어그램]![image](https://github.com/sw801733/file-extension-blocker/assets/84767822/f90086bc-0650-4c79-995c-8dbd5b22f681)
+![구현 다이어그램](https://github.com/sw801733/file-extension-blocker/assets/84767822/f90086bc-0650-4c79-995c-8dbd5b22f681)
 
 
 ## 아키텍처
