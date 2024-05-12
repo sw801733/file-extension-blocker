@@ -21,7 +21,8 @@ https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
 
 
 ## 아키텍처
-![아키텍처](https://github.com/sw801733/file-extension-blocker/assets/84767822/3ea57c2d-6947-41dd-836d-d47cf6af42ca)
+![아키텍처](https://github.com/sw801733/file-extension-blocker/assets/84767822/9afe4e4f-3e53-4272-9a9d-847061895684)
+
 
 ## ERD
 ![ERD](https://github.com/sw801733/file-extension-blocker/assets/84767822/523cce5b-9902-49f7-a65d-c44e5e8f4470)
