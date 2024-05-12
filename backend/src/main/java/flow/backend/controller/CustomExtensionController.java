@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,14 +26,20 @@ public class CustomExtensionController {
     // 메서드에 따른 Controller 구분
 
     @PostMapping("/")
-    public ResponseEntity<ExtensionResponse> addCustomExtension(@RequestBody ExtensionRequest request) {
-        ExtensionResponse response = customExtensionService.addCustomExtension(request);
+    public ResponseEntity<ExtensionResponse> addCustomExtension(@RequestParam("extension") String extension) {
+        ExtensionRequest extensionRequest = ExtensionRequest.builder()
+            .extension(extension)
+            .build();
+        ExtensionResponse response = customExtensionService.addCustomExtension(extensionRequest);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<ExtensionResponse> deleteCustomExtension(@RequestBody ExtensionRequest request) {
-        ExtensionResponse response = customExtensionService.deleteCustomExtension(request);
+    public ResponseEntity<ExtensionResponse> deleteCustomExtension(@RequestParam("extension") String extension) {
+        ExtensionRequest extensionRequest = ExtensionRequest.builder()
+            .extension(extension)
+            .build();
+        ExtensionResponse response = customExtensionService.deleteCustomExtension(extensionRequest);
         return ResponseEntity.ok(response);
     }
 
