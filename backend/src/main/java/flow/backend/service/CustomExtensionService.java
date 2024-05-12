@@ -15,7 +15,7 @@ public class CustomExtensionService {
 
     private final ExtensionRepository extensionRepository;
 
-    public ExtensionResponse enableCustomExtension(ExtensionRequest extensionRequest) {
+    public ExtensionResponse addCustomExtension(ExtensionRequest extensionRequest) {
 
         String extensionName = extensionRequest.getExtension();
 
@@ -30,7 +30,27 @@ public class CustomExtensionService {
             .extension(extensionName)
             .type("Custom")
             .checked(true)
-            .result(extensionName + " 커스텀 확장자가 활성화 되었습니다.")
+            .result(extensionName + " 커스텀 확장자가 추가 되었습니다.")
             .build();
+    }
+
+    public ExtensionResponse deleteCustomExtension(ExtensionRequest extensionRequest) {
+        String extensionName = extensionRequest.getExtension();
+        String extensionType = extensionRequest.getType();
+        boolean isChecked = extensionRequest.isChecked();
+
+        Extension extension = extensionRepository.findByExtension(extensionName);
+
+        if (isChecked) {
+            extensionRepository.delete(extension);
+        }
+
+        return ExtensionResponse.builder()
+            .extension(extensionName)
+            .type(extensionType)
+            .checked(false)
+            .result(extensionName + " 커스텀 확장자가 삭제 되었습니다.")
+            .build();
+
     }
 }
