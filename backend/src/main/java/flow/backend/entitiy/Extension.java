@@ -30,7 +30,7 @@ public class Extension {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "checked", nullable = false)
-    private boolean checked;
+    @Column(name = "is_checked", nullable = false)
+    private boolean isChecked;
 
 }
