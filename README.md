@@ -22,6 +22,18 @@ https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
 - **`type`** : 확장자 유형 ("fixed" 또는 "custom") [text]
 - **`is_checked`** : 확장자가 활성화(차단) 상태인지 여부 [tinyint]
 
+## API 명세
+
+- `POST`
+    - api/fix-extension/{extension} : 고정 확장자 **추가** 메서드
+    - api/custom-extension/{extension} : 커스텀 확장자 **추가** 메서드
+- `DELETE`
+    - api/fix-extension/{extension} : 고정 확장자 **삭제** 메서드
+    - api/custom-extension/{extension} : 커스텀 확장자 **삭제** 메서드
+- `GET`
+    - api/fix-extension : 추가한 고정 확장자 **조회** 메서드
+    - api/custom-extension : 추가한 커스텀 확장자 **조회** 메서드
+
 
 ## 고려사항
 
