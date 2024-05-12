@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,14 +24,20 @@ public class FixExtensionController {
     // 메서드에 따른 Controller 구분
 
     @PostMapping("/")
-    public ResponseEntity<ExtensionResponse> enableFixExtension(@RequestBody ExtensionRequest request) {
-        ExtensionResponse response = fixExtensionService.enableFixExtension(request);
+    public ResponseEntity<ExtensionResponse> enableFixExtension(@RequestParam("extension") String extension) {
+        ExtensionRequest extensionRequest = ExtensionRequest.builder()
+            .extension(extension)
+            .build();
+        ExtensionResponse response = fixExtensionService.enableFixExtension(extensionRequest);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping ("/")
-    public ResponseEntity<ExtensionResponse> disableFixExtension(@RequestBody ExtensionRequest request) {
-        ExtensionResponse response = fixExtensionService.disableFixExtension(request);
+    public ResponseEntity<ExtensionResponse> disableFixExtension(@RequestParam("extension") String extension) {
+        ExtensionRequest extensionRequest = ExtensionRequest.builder()
+            .extension(extension)
+            .build();
+        ExtensionResponse response = fixExtensionService.disableFixExtension(extensionRequest);
         return ResponseEntity.ok(response);
     }
 
