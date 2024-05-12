@@ -5,6 +5,8 @@ import flow.backend.dto.response.ExtensionResponse;
 import flow.backend.entitiy.Extension;
 import flow.backend.repository.ExtensionRepository;
 import jakarta.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +57,18 @@ public class FixExtensionService {
             .result(extensionName + " 고정 확장자가 비활성화 되었습니다.")
             .build();
 
+    }
+
+    public List<ExtensionResponse> findAllEnableFixExtensions() {
+        List<Extension> extensions = extensionRepository.findByTypeAndIsCheckedTrue("Fix");
+
+        return extensions.stream().map(extension
+            -> ExtensionResponse.builder()
+            .type("Fix")
+            .extension(extension.getExtension())
+            .checked(extension.isChecked())
+            .build()
+        ).collect(Collectors.toList());
     }
 
 }
