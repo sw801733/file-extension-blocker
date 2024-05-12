@@ -13,13 +13,13 @@
     <div class="flex-container">
         <span class="fixed-label">고정 확장자</span>
         <div id="fixFileExtension">
-            <label><input type="checkbox" name="ext" value="bat"> bat</label>
-            <label><input type="checkbox" name="ext" value="cmd"> cmd</label>
-            <label><input type="checkbox" name="ext" value="com"> com</label>
-            <label><input type="checkbox" name="ext" value="cpl"> cpl</label>
-            <label><input type="checkbox" name="ext" value="exe"> exe</label>
-            <label><input type="checkbox" name="ext" value="scr"> scr</label>
-            <label><input type="checkbox" name="ext" value="js"> js</label>
+            <label><input type="checkbox" name="ext" value="bat" id="bat"> bat</label>
+            <label><input type="checkbox" name="ext" value="cmd" id="cmd"> cmd</label>
+            <label><input type="checkbox" name="ext" value="com" id="com"> com</label>
+            <label><input type="checkbox" name="ext" value="cpl" id="cpl"> cpl</label>
+            <label><input type="checkbox" name="ext" value="exe" id="exe"> exe</label>
+            <label><input type="checkbox" name="ext" value="scr" id="scr"> scr</label>
+            <label><input type="checkbox" name="ext" value="js" id="js"> js</label>
         </div>
     </div>
 
@@ -50,9 +50,13 @@
                 contentType: "application/json",
                 success: function(response) {
                     console.log("Response : ", response);
+                    response.forEach(ext => {
+                        // 각 확장자에 해당하는 체크박스를 찾고, 상태를 업데이트합니다.
+                        $('#' + ext.extension).prop('checked', ext.checked);
+                    });
                 },
                 error: function(xhr, status, error) {
-                    console.log("Error : ", error);
+                    console.error("Error : ", error);
                 }
             });
 
@@ -63,11 +67,31 @@
                 contentType: "application/json",
                 success: function(response) {
                     console.log("Response : ", response);
+                    response.forEach(ext => {
+                        addCustomExtensionElement(ext.extension);
+                    });
                 },
                 error: function(xhr, status, error) {
-                    console.log("Error : ", error);
+                    console.error("Error : ", error);
                 }
             });
+
+            function addCustomExtensionElement(extensionName) {
+                const customExtensionList = document.getElementById('customExtensionList');
+                if (customExtensionList.children.length < MAX_COUNT) {
+                    const newExtension = document.createElement('div');
+                    newExtension.className = 'custom-extension';
+                    const extensionText = document.createElement('span');
+                    extensionText.textContent = extensionName;
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'X';
+                    deleteButton.onclick = () => { deleteCustomExtension(newExtension); };
+                    newExtension.appendChild(extensionText);
+                    newExtension.appendChild(deleteButton);
+                    customExtensionList.appendChild(newExtension);
+                    updateExtensionCounter(1);
+                }
+            }
 
             // 고정 확장자 변경 시 API 요청
             $("#fixFileExtension input[type='checkbox']").change(function() {
