@@ -6,6 +6,7 @@ import flow.backend.service.FixExtensionService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,12 @@ public class FixExtensionController {
     @PostMapping("/")
     public ResponseEntity<ExtensionResponse> enableFixExtension(@RequestBody ExtensionRequest request) {
         ExtensionResponse response = fixExtensionService.enableFixExtension(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping ("/")
+    public ResponseEntity<ExtensionResponse> disableFixExtension(@RequestBody ExtensionRequest request) {
+        ExtensionResponse response = fixExtensionService.disableFixExtension(request);
         return ResponseEntity.ok(response);
     }
 }
