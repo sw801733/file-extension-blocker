@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExtensionRepository extends JpaRepository<Extension, Long>{
     // 선택한 고정 확장자 or 커스텀 확장자 모두 조회
-    List<Extension> findByTypeAndisCheckedTrue(String type);
+    List<Extension> findByTypeAndIsCheckedTrue(String type);
 
     // 특정 확장자 조회
     Extension findByExtension(String extension);
