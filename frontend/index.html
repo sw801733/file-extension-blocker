@@ -170,12 +170,7 @@
             
             // 입력 값이 있을 경우 & 최대 개수 이하인 경우 커스텀 확장자 추가
             if (input && customExtensionList.children.length < MAX_COUNT) {
-                
-                // 커스텀 확장자 추가
-                addCustomExtensionElement(input);
 
-                // 커스텀 확장자 입력 필드 초기화
-                inputField.value = '';
                 
                 // 커스텀 확장자 추가 시 API 요청
                 $.ajax({
@@ -184,10 +179,16 @@
                     contentType: "application/json",
                     data: JSON.stringify({ extension: input, }),
                     success: function(response) {
+                        // 커스텀 확장자 추가
+                        addCustomExtensionElement(input);
+
+                        // 커스텀 확장자 입력 필드 초기화
+                        inputField.value = '';
                         console.log("Response : ", response);
                     },
                     error: function(xhr, status, error) {
-                        console.log("Error : ", error);
+                        console.log("Error: " + xhr.responseJSON.result);
+                        alert("중복된 확장자 이름입니다!");
                     }
                 });
             }
