@@ -173,6 +173,12 @@
                 alert("최대 확장자 개수를 초과하였습니다!");
                 return;
             }
+
+            // 입력 길이가 20자를 초과하는 경우 Alert
+            if (input.length > 20) {
+                alert("확장자는 20자를 초과할 수 없습니다!");
+                return;
+            }
             
             // 입력 값이 있을 경우 & 최대 개수 이하인 경우 커스텀 확장자 추가
             if (input && customExtensionList.children.length < MAX_COUNT) {
