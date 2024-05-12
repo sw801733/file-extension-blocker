@@ -1,4 +1,11 @@
-# file-extension-blocker
+
+# 구현 내용
+- 고정 확장자 추가 및 삭제 기능
+- 커스텀 확장자 추가 및 삭제 기능
+  - 커스텀 확장자 글자 수 20자로 제한 
+  - 커스텀 확장자 중복 입력 시 Alert / 추가 X
+  - 입력 없이 추가 시 Alert / 추가 X
+  - 확장자 추가 개수 초과 시 Alert / 추가 X
 
 # 개발 일지
 https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
@@ -7,6 +14,7 @@ https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
 - `JQuery` 와 Github Page 를 활용한 **Frontend** 사이트 개발
 - `Spring Boot` 와 AWS EC2 를 활용한 **Backend** 서버 개발
 - `AWS RDS` MySQL 을 활용한 **Database** 구축
+- `AWS Route 53` 과 `AWS ALB` 를 통한 백엔드 서버 HTTPS 설정
 
 ## 구현 방법 다이어그램
 ![구현 다이어그램](https://github.com/sw801733/file-extension-blocker/assets/84767822/f90086bc-0650-4c79-995c-8dbd5b22f681)
@@ -36,7 +44,7 @@ https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
     - api/custom-extension : 추가한 커스텀 확장자 **조회** 메서드
 
 
-## 고려사항
+# 고려사항
 
 **과제 설계와 구현 상에서 고려해야할 사항**
 
@@ -47,3 +55,10 @@ https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
     - Github Page 는 HTTPS 이며 EC2는 기본적으로 HTTP 이므로 EC2 서버를 HTTPS 로 설정해야 한다. (ACM & ALB)
 - EC2 와 RDS 를 통해 연결이 가능하도록 **VPC 를 설정**한다. 단, RDS 는 EC2 에서만 접근하도록 **Private subnet** 으로 설정한다.
 
+# 결과
+![Animation](https://github.com/sw801733/file-extension-blocker/assets/84767822/29a209cf-89e1-45dc-8861-3882b218483b)
+
+# 추후 수정 및 개선 필요 사항
+- 테스트 코드 작성
+- 서버와의 통신, SQL문 수행 등 다양한 경우에 대한 예외 처리 추가 
+- `EC2` 와 `RDS` VPC 보안 검토
