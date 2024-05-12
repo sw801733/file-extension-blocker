@@ -26,11 +26,19 @@ public class CustomExtensionController {
 
     @PostMapping("/{extension}")
     public ResponseEntity<ExtensionResponse> addCustomExtension(@PathVariable String extension) {
-        ExtensionRequest extensionRequest = ExtensionRequest.builder()
-            .extension(extension)
-            .build();
-        ExtensionResponse response = customExtensionService.addCustomExtension(extensionRequest);
-        return ResponseEntity.ok(response);
+        try {
+            ExtensionRequest extensionRequest = ExtensionRequest.builder()
+                .extension(extension)
+                .build();
+            ExtensionResponse response = customExtensionService.addCustomExtension(extensionRequest);
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity
+                .badRequest()
+                .body(ExtensionResponse.builder()
+                    .result(e.getMessage())
+                    .build());
+        }
     }
 
     @DeleteMapping("/{extension}")
