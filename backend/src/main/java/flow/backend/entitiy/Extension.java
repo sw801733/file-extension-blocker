@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Extensions {
+public class Extension {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
