@@ -40,10 +40,10 @@ public class CustomExtensionService {
     // 커스텀 확장자 삭제
     public ExtensionResponse deleteCustomExtension(ExtensionRequest extensionRequest) {
         String extensionName = extensionRequest.getExtension();
-        String extensionType = extensionRequest.getType();
-        boolean isChecked = extensionRequest.isChecked();
-
         Extension extension = extensionRepository.findByExtension(extensionName);
+
+        String extensionType = extension.getType();
+        boolean isChecked = extension.isChecked();
 
         if (isChecked) {
             extensionRepository.delete(extension);
