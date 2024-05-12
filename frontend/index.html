@@ -123,7 +123,7 @@
         }
 
         // 추가 확장자 개수 제한
-        const MAX_COUNT = 200;
+        const MAX_COUNT = 1;
         
         // DOM 트리 완성 시 변수 적용
         document.addEventListener('DOMContentLoaded', function() {
@@ -167,6 +167,12 @@
             // 커스텀 확장자 추가 박스 요소
             const customExtensionList = document.getElementById('customExtensionList');
             const customExtensionCounter = document.getElementById('customExtensionCounter');
+
+            // 커스텀 확장자 최대 개수 초과 시 Alert
+            if (customExtensionList.children.length >= MAX_COUNT) {
+                alert("최대 확장자 개수를 초과하였습니다!");
+                return;
+            }
             
             // 입력 값이 있을 경우 & 최대 개수 이하인 경우 커스텀 확장자 추가
             if (input && customExtensionList.children.length < MAX_COUNT) {
@@ -191,6 +197,11 @@
                         alert("중복된 확장자 이름입니다!");
                     }
                 });
+            } else {
+                // 확장자 이름을 입력하지 않은 경우 Alert
+                if (!input) {
+                    alert("확장자 이름을 입력해주세요!")
+                }
             }
         }
 
