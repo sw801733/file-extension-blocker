@@ -31,4 +31,6 @@ https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
 - Backend 의 EC2 **VPC** 설정으로 Github Page 에서만 접근이 가능하도록 설정한다.
     - Github Page 는 VPC 에서 고정으로 접근제어를 할 수는 없으므로 **8080 포트** 접근 추가
 - Frontend 와 Backend 사이의 **CORS** 설정을 하고 Github Page 도메인에 대해서만 접근이 가능하도록 설정한다.
+    - Github Page 는 HTTPS 이며 EC2는 기본적으로 HTTP 이므로 EC2 서버를 HTTPS 로 설정해야 한다. (ACM & ALB)
 - EC2 와 RDS 를 통해 연결이 가능하도록 **VPC 를 설정**한다. 단, RDS 는 EC2 에서만 접근하도록 **Private subnet** 으로 설정한다.
+
