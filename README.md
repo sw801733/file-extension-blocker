@@ -1,5 +1,8 @@
 # file-extension-blocker
 
+# 개발 일지
+https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
+
 # 구현 방법
 - `React` 와 Github Page 를 활용한 **Frontend** 사이트 개발
 - `Spring Boot` 와 AWS EC2 를 활용한 **Backend** 서버 개발
