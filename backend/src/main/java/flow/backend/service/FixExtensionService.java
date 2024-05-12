@@ -45,7 +45,7 @@ public class FixExtensionService {
 
         Extension extension = extensionRepository.findByExtension(extensionName);
 
-        if (!isChecked) {
+        if (isChecked) {
             extension.setChecked(false);
             extensionRepository.save(extension);
         }
