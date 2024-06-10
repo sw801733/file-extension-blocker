@@ -12,11 +12,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
-@RequiredArgsConstructor
-public class CustomExtensionService {
+public class CustomExtensionService extends AbstractExtensionService {
 
-    private final ExtensionRepository extensionRepository;
+
+    public CustomExtensionService(ExtensionRepository extensionRepository) {
+        super(extensionRepository);
+    }
+
+    @Override
+    protected String getExtensionType() {
+        return "Custom";
+    }
 
     // 커스텀 확장자 추가
     public ExtensionResponse addCustomExtension(ExtensionRequest extensionRequest) {
@@ -65,16 +71,5 @@ public class CustomExtensionService {
 
     }
 
-    // 추가한 커스텀 확장자 모두 조회
-    public List<ExtensionResponse> findAllEnableCustomExtensions() {
-        List<Extension> extensions = extensionRepository.findByTypeAndIsCheckedTrue("Custom");
 
-        return extensions.stream().map(extension
-            -> ExtensionResponse.builder()
-            .type("Custom")
-            .extension(extension.getExtension())
-            .checked(extension.isChecked())
-            .build()
-        ).collect(Collectors.toList());
-    }
 }

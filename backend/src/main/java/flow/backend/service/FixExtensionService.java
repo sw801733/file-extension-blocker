@@ -7,15 +7,21 @@ import flow.backend.repository.ExtensionRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
-@RequiredArgsConstructor
-public class FixExtensionService {
+public class FixExtensionService extends AbstractExtensionService{
 
-    private final ExtensionRepository extensionRepository;
+    public FixExtensionService(ExtensionRepository extensionRepository) {
+        super(extensionRepository);
+    }
+
+    @Override
+    protected String getExtensionType() {
+        return "Fix";
+    }
 
     // 고정 확장자 활성화
     public ExtensionResponse enableFixExtension(ExtensionRequest extensionRequest) {
@@ -61,17 +67,5 @@ public class FixExtensionService {
 
     }
 
-    // 활성화된 고정 확장자 모두 조회
-    public List<ExtensionResponse> findAllEnableFixExtensions() {
-        List<Extension> extensions = extensionRepository.findByTypeAndIsCheckedTrue("Fix");
-
-        return extensions.stream().map(extension
-            -> ExtensionResponse.builder()
-            .type("Fix")
-            .extension(extension.getExtension())
-            .checked(extension.isChecked())
-            .build()
-        ).collect(Collectors.toList());
-    }
 
 }
