@@ -25,7 +25,7 @@ public class CustomExtensionService extends AbstractExtensionService {
     }
 
     // 커스텀 확장자 추가
-    public ExtensionResponse addCustomExtension(ExtensionRequest extensionRequest) {
+    public ExtensionResponse addExtension(ExtensionRequest extensionRequest) {
 
         String extensionName = extensionRequest.getExtension();
 
@@ -51,7 +51,7 @@ public class CustomExtensionService extends AbstractExtensionService {
     }
 
     // 커스텀 확장자 삭제
-    public ExtensionResponse deleteCustomExtension(ExtensionRequest extensionRequest) {
+    public ExtensionResponse deleteExtension(ExtensionRequest extensionRequest) {
         String extensionName = extensionRequest.getExtension();
         Extension extension = extensionRepository.findByExtension(extensionName);
 

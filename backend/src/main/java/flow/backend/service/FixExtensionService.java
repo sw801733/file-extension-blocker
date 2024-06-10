@@ -24,7 +24,7 @@ public class FixExtensionService extends AbstractExtensionService{
     }
 
     // 고정 확장자 활성화
-    public ExtensionResponse enableFixExtension(ExtensionRequest extensionRequest) {
+    public ExtensionResponse addExtension(ExtensionRequest extensionRequest) {
 
         String extensionName = extensionRequest.getExtension();
         String extensionType = extensionRequest.getType();
@@ -46,7 +46,7 @@ public class FixExtensionService extends AbstractExtensionService{
     }
 
     // 고정 확장자 비활성화
-    public ExtensionResponse disableFixExtension(ExtensionRequest extensionRequest) {
+    public ExtensionResponse deleteExtension(ExtensionRequest extensionRequest) {
         String extensionName = extensionRequest.getExtension();
         Extension extension = extensionRepository.findByExtension(extensionName);
 
