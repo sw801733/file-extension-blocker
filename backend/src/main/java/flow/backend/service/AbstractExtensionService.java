@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public abstract class AbstractExtensionService {
+public abstract class AbstractExtensionService implements ExtensionService{
 
     protected final ExtensionRepository extensionRepository;
 
     protected abstract String getExtensionType();
 
-    public List<ExtensionResponse> findAllEnableCustomExtensions() {
+    public List<ExtensionResponse> findAllEnabledExtensions() {
         List<Extension> extensions = extensionRepository.findByTypeAndIsCheckedTrue(getExtensionType());
 
         return extensions.stream().map(extension
