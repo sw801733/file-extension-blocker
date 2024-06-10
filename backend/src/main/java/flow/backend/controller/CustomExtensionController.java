@@ -2,8 +2,8 @@ package flow.backend.controller;
 
 import flow.backend.dto.request.ExtensionRequest;
 import flow.backend.dto.response.ExtensionResponse;
-import flow.backend.service.CustomExtensionService;
 
+import flow.backend.service.ExtensionService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CustomExtensionController {
 
-    private final CustomExtensionService customExtensionService;
+    private final ExtensionService customExtensionService;
 
 
     // 메서드에 따른 Controller 구분
@@ -30,7 +30,7 @@ public class CustomExtensionController {
             ExtensionRequest extensionRequest = ExtensionRequest.builder()
                 .extension(extension)
                 .build();
-            ExtensionResponse response = customExtensionService.addCustomExtension(extensionRequest);
+            ExtensionResponse response = customExtensionService.addExtension(extensionRequest);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity
@@ -46,13 +46,13 @@ public class CustomExtensionController {
         ExtensionRequest extensionRequest = ExtensionRequest.builder()
             .extension(extension)
             .build();
-        ExtensionResponse response = customExtensionService.deleteCustomExtension(extensionRequest);
+        ExtensionResponse response = customExtensionService.deleteExtension(extensionRequest);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
     public ResponseEntity<List<ExtensionResponse>> findAllCustomExtension() {
-        List<ExtensionResponse> responses = customExtensionService.findAllEnableCustomExtensions();
+        List<ExtensionResponse> responses = customExtensionService.findAllEnabledExtensions();
         return ResponseEntity.ok(responses);
     }
 }

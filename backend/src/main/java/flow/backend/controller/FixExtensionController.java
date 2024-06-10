@@ -2,7 +2,8 @@ package flow.backend.controller;
 
 import flow.backend.dto.request.ExtensionRequest;
 import flow.backend.dto.response.ExtensionResponse;
-import flow.backend.service.FixExtensionService;
+import flow.backend.service.ExtensionService;
+
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class FixExtensionController {
 
-    private final FixExtensionService fixExtensionService;
+    private final ExtensionService fixExtensionService;
 
     // 메서드에 따른 Controller 구분
 
@@ -27,7 +28,7 @@ public class FixExtensionController {
         ExtensionRequest extensionRequest = ExtensionRequest.builder()
             .extension(extension)
             .build();
-        ExtensionResponse response = fixExtensionService.enableFixExtension(extensionRequest);
+        ExtensionResponse response = fixExtensionService.addExtension(extensionRequest);
         return ResponseEntity.ok(response);
     }
 
@@ -36,13 +37,13 @@ public class FixExtensionController {
         ExtensionRequest extensionRequest = ExtensionRequest.builder()
             .extension(extension)
             .build();
-        ExtensionResponse response = fixExtensionService.disableFixExtension(extensionRequest);
+        ExtensionResponse response = fixExtensionService.deleteExtension(extensionRequest);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
     public ResponseEntity<List<ExtensionResponse>> findAllFixExtension() {
-        List<ExtensionResponse> responses = fixExtensionService.findAllEnableFixExtensions();
+        List<ExtensionResponse> responses = fixExtensionService.findAllEnabledExtensions();
         return ResponseEntity.ok(responses);
     }
 }
