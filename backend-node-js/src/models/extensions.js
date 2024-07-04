@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     is_checked: DataTypes.BOOLEAN
   }, {
+    timestamps: false,
     sequelize,
     modelName: 'Extensions',
   });
