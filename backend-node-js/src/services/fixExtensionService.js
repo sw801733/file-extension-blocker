@@ -1,6 +1,6 @@
 const Extensions = require("../models/extensions");
 
-export class fixExtensionService {
+class fixExtensionService {
   addExtension = async (req, res, next) => {
     const extensionName = req.extensionName;
     const extensionType = req.extensionType;
@@ -28,3 +28,5 @@ export class fixExtensionService {
     return extension;
   };
 }
+
+module.exports = fixExtensionService;
