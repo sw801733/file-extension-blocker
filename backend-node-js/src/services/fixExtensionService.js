@@ -24,8 +24,17 @@ class fixExtensionService {
         }
       );
     }
-
     return extension;
+  };
+
+  findAllEnabledExtensions = async (req, res, next) => {
+    const extensions = Extensions.findAll({
+      where: {
+        is_checked: true,
+      },
+    });
+
+    return extensions;
   };
 }
 
