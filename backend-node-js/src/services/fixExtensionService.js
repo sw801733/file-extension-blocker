@@ -1,9 +1,7 @@
 const Extensions = require("../models/extensions");
 
 class fixExtensionService {
-  addExtension = async (req, res, next) => {
-    const extensionName = req.extensionName;
-    const extensionType = req.extensionType;
+  addExtension = async (extensionName, extensionType) => {
 
     const extension = Extensions.findOne({
       where: {
@@ -27,7 +25,7 @@ class fixExtensionService {
     return extension;
   };
 
-  findAllEnabledExtensions = async (req, res, next) => {
+  findAllEnabledExtensions = async () => {
     const extensions = Extensions.findAll({
       where: {
         is_checked: true,
@@ -37,9 +35,7 @@ class fixExtensionService {
     return extensions;
   };
 
-  deleteExtension = async (req, res, next) => {
-    const extensionName = req.extensionName;
-    const extensionType = req.extensionType;
+  deleteExtension = async (extensionName, extensionType) => {
 
     const extension = Extensions.findOne({
       where: {

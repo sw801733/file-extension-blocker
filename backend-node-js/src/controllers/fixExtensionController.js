@@ -15,7 +15,8 @@ class fixExtensionController {
 
     enableFixExtension = async (req, res, next) => {
         // 고정 확장자 활성화
-        const extension = await this.fixExtensionService.addExtension();
+        const {extensionName, extensionType} = req.body;
+        const extension = await this.fixExtensionService.addExtension(extensionName, extensionType);
 
         console.log("고정 확장자 활성화");
         res.status(200).json({data : extension});
@@ -23,7 +24,8 @@ class fixExtensionController {
 
     disableFixExtension = async (req, res, next) => {
         // 고정 확장자 비활성화
-        const extension = await this.fixExtensionService.deleteExtension();
+        const {extensionName, extensionType} = req.body;
+        const extension = await this.fixExtensionService.deleteExtension(extensionName, extensionType);
 
         console.log("고정 확장자 비활성화");
         res.status(200).json({data : extension});
