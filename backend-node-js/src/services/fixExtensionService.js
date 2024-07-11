@@ -36,6 +36,32 @@ class fixExtensionService {
 
     return extensions;
   };
+
+  deleteExtension = async (req, res, next) => {
+    const extensionName = req.extensionName;
+    const extensionType = req.extensionType;
+
+    const extension = Extensions.findOne({
+      where: {
+        extension: extensionName,
+        type: extensionType,
+      },
+    });
+
+    const isChecked = extension.is_checked;
+
+    if (isChecked) {
+      Extensions.update(
+        { is_checked: false },
+        {
+          where: {
+            extension: extensionName,
+          },
+        }
+      );
+    }
+    return extension;
+  };
 }
 
 module.exports = fixExtensionService;
