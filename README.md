@@ -47,9 +47,8 @@ https://sprinkle-random-ca4.notion.site/44835d4da09d46e9b12cefe2dc18e9fe?pvs=4
 
 # 고려사항
 
-**과제 설계와 구현 상에서 고려해야할 사항**
+**설계와 구현 상에서 고려해야할 사항**
 
-- 면접 가능일까지 접근이 가능해야 하므로 위의 모든 서비스가 **접근 가능하도록 유지**되어야 한다.
 - Backend 의 EC2 **VPC** 설정으로 Github Page 에서만 접근이 가능하도록 설정한다.
     - Github Page 는 VPC 에서 고정으로 접근제어를 할 수는 없으므로 우선은 CORS 설정으로 Github Page 도메인만 등록한다.
     - Github Page 는 HTTPS 이며 EC2는 기본적으로 HTTP 이므로 EC2 서버를 HTTPS 로 설정해야 한다. (ACM & ALB)
